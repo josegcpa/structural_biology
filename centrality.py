@@ -117,11 +117,11 @@ def min_distance(pdb_dict,res_dict,distance_cutoff):
     n_res = 0
     for chain in res_dict:
         for res in res_dict[chain]:
-            residue_ranges[chain + res] = [n_res,i]
+            residue_ranges[res + chain] = [n_res,i]
             for atom in pdb_dict[chain][res]:
                 coord_list.append([atom['x'],atom['y'],atom['z']])
                 i += 1
-            residue_ranges[chain + res].append(i)
+            residue_ranges[res + chain].append(i)
             n_res += 1
     dist_matrix = squareform(pdist(coord_list))
     min_dist_matrix = np.ones((n_res,n_res)) * inf
